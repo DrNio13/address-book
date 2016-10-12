@@ -7,4 +7,5 @@ export class Contact {
     email: string;
     img: string;
     country: string;
+    postcard: string;
 }

@@ -1,24 +1,26 @@
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Location }               from '@angular/common';
 
 import { Contact } from '../contact/contact';
 import { ContactService } from '../shared/contact.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'contact-detail',
-    templateUrl: './contact-detail.component.html',
-    styleUrls: ['./contact-detail.component.css']
+    selector: 'admin',
+    templateUrl: './admin.component.html',
+    styleUrls: ['../contact-detail-component/contact-detail.component.css']
 })
 
-export class ContactDetailsComponent implements OnInit{
+export class AdminComponent implements OnInit {
 
     contact: Contact;
     contacts: Contact[];
 
     constructor(
         private contactService: ContactService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private location: Location
     ){}
 
     ngOnInit(): void {
@@ -33,14 +35,7 @@ export class ContactDetailsComponent implements OnInit{
             .then((contacts)=> this.contacts = contacts);
     }
 
-    // Delete contact object
-    deleteContact(contact: Contact): void {
-        this.contacts.splice(this.contacts.indexOf(contact), 1);
-    }
-
-    saveContact():void {
-        this.contactService.update(this.contact)
-            .then( () => window.alert("Contact has been successfully saved! :)") )
-            .catch(()=> console.log("Error dude"));
+    goBack(): void {
+        this.location.back();
     }
 }

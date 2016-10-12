@@ -10,15 +10,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var router_1 = require('@angular/router');
+var forms_1 = require('@angular/forms');
+var http_1 = require('@angular/http');
+// Fake Web Server Http requests
+var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
+var data_service_1 = require('./shared/data.service');
 var app_component_1 = require('./app.component');
 var contact_service_1 = require('./shared/contact.service');
+var contacts_component_1 = require('./contacts-component/contacts.component');
+var contact_detail_component_1 = require('./contact-detail-component/contact-detail.component');
+var admin_component_1 = require('./admin/admin.component');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.AppComponent],
+            imports: [
+                platform_browser_1.BrowserModule,
+                forms_1.FormsModule,
+                http_1.HttpModule,
+                angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(data_service_1.DataService),
+                router_1.RouterModule.forRoot([
+                    {
+                        path: 'contacts/:id',
+                        component: contact_detail_component_1.ContactDetailsComponent
+                    },
+                    {
+                        path: 'admin',
+                        component: admin_component_1.AdminComponent
+                    },
+                    {
+                        path: '',
+                        component: contacts_component_1.ContactsComponent
+                    }
+                ])
+            ],
+            declarations: [
+                app_component_1.AppComponent,
+                contacts_component_1.ContactsComponent,
+                contact_detail_component_1.ContactDetailsComponent,
+                admin_component_1.AdminComponent
+            ],
             providers: [contact_service_1.ContactService],
             bootstrap: [app_component_1.AppComponent]
         }), 

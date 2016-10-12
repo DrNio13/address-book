@@ -1,0 +1,18 @@
+<div class="container">
+    <article *ngFor="let contact of contacts" class="card">
+        <figure (click)="goToDetails(contact)" class="col-xs-4 col-sm-2 col-md-3">
+            <img class="img-responsive" src="{{contact.img}}" alt="" title="">
+        </figure>
+        <div class="col-xs-8 col-sm-10 col-md-9">
+            <div class="row">
+                <h3 (click)="goToDetails(contact)" class="col-xs-12 name">
+                    <span>{{contact.name}}</span>
+                    <span>{{contact.lastName}}</span>
+                </h3>
+            </div>
+            <div class="row">
+                <p class="col-xs-12">{{contact.country}}</p>
+            </div>
+        </div>
+    </article>
+</div>

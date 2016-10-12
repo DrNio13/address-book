@@ -1,18 +1,5 @@
-@import "shared/css/mixins";
-
-body {
-  background: whitesmoke;
-}
-
-.headline {
-  background: white;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  overflow: auto;
-  margin: 0 0 10px 0;
-  border-bottom: 1px solid #d8d8d8;
-  box-shadow: 0 1px 1px #e8e7e7;
-}
+@import "../shared/css/mixins";
+@import "../app.component";
 
 .card {
   @extend .headline;
@@ -30,6 +17,12 @@ body {
     }
   }
 
+  .name {
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
   h3 {
     margin-top: 10px;
   }
@@ -37,6 +30,10 @@ body {
   img {
     border-radius: 50%;
     border: 5px solid #c7c7c7;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .delete-icon {

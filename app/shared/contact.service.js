@@ -8,17 +8,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var mock_contacts_1 = require('./mock-contacts');
 var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/toPromise');
 var ContactService = (function () {
-    function ContactService() {
+    function ContactService(http) {
+        this.http = http;
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.httpUrl = '../contact/contacts';
     }
     ContactService.prototype.getContacts = function () {
-        return Promise.resolve(mock_contacts_1.CONTACTS);
+        return this.http.get(this.httpUrl)
+            .toPromise()
+            .then(function (response) { return response.json().data; });
+        // .catch(this.handleError);
+    };
+    ContactService.prototype.getContact = function (id) {
+        return this.getContacts().then(function (contacts) { return contacts.find(function (contact) { return contact.id === id; }); });
+    };
+    ContactService.prototype.update = function (contact) {
+        var url = this.httpUrl + "/" + contact.id;
+        return this.http
+            .put(url, JSON.stringify(contact), { headers: this.headers })
+            .toPromise()
+            .then(function () { return contact; });
     };
     ContactService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], ContactService);
     return ContactService;
 }());

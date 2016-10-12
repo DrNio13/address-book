@@ -10,13 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var common_1 = require('@angular/common');
 var contact_service_1 = require('../shared/contact.service');
-var ContactDetailsComponent = (function () {
-    function ContactDetailsComponent(contactService, route) {
+var AdminComponent = (function () {
+    function AdminComponent(contactService, route, location) {
         this.contactService = contactService;
         this.route = route;
+        this.location = location;
     }
-    ContactDetailsComponent.prototype.ngOnInit = function () {
+    AdminComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.forEach(function (params) {
             var id = +params['id']; // convert string id to number
@@ -27,25 +29,19 @@ var ContactDetailsComponent = (function () {
         this.contactService.getContacts()
             .then(function (contacts) { return _this.contacts = contacts; });
     };
-    // Delete contact object
-    ContactDetailsComponent.prototype.deleteContact = function (contact) {
-        this.contacts.splice(this.contacts.indexOf(contact), 1);
+    AdminComponent.prototype.goBack = function () {
+        this.location.back();
     };
-    ContactDetailsComponent.prototype.saveContact = function () {
-        this.contactService.update(this.contact)
-            .then(function () { return window.alert("Contact has been successfully saved! :)"); })
-            .catch(function () { return console.log("Error dude"); });
-    };
-    ContactDetailsComponent = __decorate([
+    AdminComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'contact-detail',
-            templateUrl: './contact-detail.component.html',
-            styleUrls: ['./contact-detail.component.css']
+            selector: 'admin',
+            templateUrl: './admin.component.html',
+            styleUrls: ['../contact-detail-component/contact-detail.component.css']
         }), 
-        __metadata('design:paramtypes', [contact_service_1.ContactService, router_1.ActivatedRoute])
-    ], ContactDetailsComponent);
-    return ContactDetailsComponent;
+        __metadata('design:paramtypes', [contact_service_1.ContactService, router_1.ActivatedRoute, common_1.Location])
+    ], AdminComponent);
+    return AdminComponent;
 }());
-exports.ContactDetailsComponent = ContactDetailsComponent;
-//# sourceMappingURL=contact-detail.component.js.map
+exports.AdminComponent = AdminComponent;
+//# sourceMappingURL=admin.component.js.map

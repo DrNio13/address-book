@@ -9,34 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var contact_service_1 = require('./shared/contact.service');
 var AppComponent = (function () {
-    function AppComponent(contactService) {
-        this.contactService = contactService;
+    function AppComponent() {
     }
-    AppComponent.prototype.getContacts = function () {
-        var _this = this;
-        this.contactService.getContacts()
-            .then(function (result) { return _this.contacts = result; });
-    };
-    // get contacts when the app starts
-    AppComponent.prototype.ngOnInit = function () {
-        this.getContacts();
-    };
-    // Get contact object on click event
-    AppComponent.prototype.getSelected = function (contact) {
-        this.selectedContact = contact;
-    };
-    // Delete contact object
-    AppComponent.prototype.deleteContact = function (contact) {
-        this.contacts.splice(this.contacts.indexOf(contact), 1);
-    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'address-book',
-            templateUrl: 'app/app.component.html'
+            templateUrl: 'app/app.component.html',
+            styleUrls: ['app/app.css']
         }), 
-        __metadata('design:paramtypes', [contact_service_1.ContactService])
+        __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 }());
