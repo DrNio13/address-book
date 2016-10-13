@@ -25,20 +25,17 @@ export class ContactDetailsComponent implements OnInit{
         this.route.params.forEach((params: Params) => {
             let id = +params['id']; // convert string id to number
             this.contactService.getContact(id) // find the specific contact based on the id
-                .then(contact => this.contact = contact);
+                .then(contact => this.contact = contact)
+                .catch(error => console.log(error));
         });
 
         // show the list for deletion
         this.contactService.getContacts()
-            .then((contacts)=> this.contacts = contacts);
+            .then((contacts)=> this.contacts = contacts)
+            .catch(error => console.log(error));
     }
 
-    // Delete contact object
-    deleteContact(contact: Contact): void {
-        this.contacts.splice(this.contacts.indexOf(contact), 1);
-    }
-
-    saveContact():void {
+    private saveContact():void {
         this.contactService.update(this.contact)
             .then( () => window.alert("Contact has been successfully saved! :)") )
             .catch(()=> console.log("Error dude"));

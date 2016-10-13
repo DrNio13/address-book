@@ -21,15 +21,13 @@ var ContactDetailsComponent = (function () {
         this.route.params.forEach(function (params) {
             var id = +params['id']; // convert string id to number
             _this.contactService.getContact(id) // find the specific contact based on the id
-                .then(function (contact) { return _this.contact = contact; });
+                .then(function (contact) { return _this.contact = contact; })
+                .catch(function (error) { return console.log(error); });
         });
         // show the list for deletion
         this.contactService.getContacts()
-            .then(function (contacts) { return _this.contacts = contacts; });
-    };
-    // Delete contact object
-    ContactDetailsComponent.prototype.deleteContact = function (contact) {
-        this.contacts.splice(this.contacts.indexOf(contact), 1);
+            .then(function (contacts) { return _this.contacts = contacts; })
+            .catch(function (error) { return console.log(error); });
     };
     ContactDetailsComponent.prototype.saveContact = function () {
         this.contactService.update(this.contact)

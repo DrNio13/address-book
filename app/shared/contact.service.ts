@@ -1,7 +1,7 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/toPromise'; // this library will provide us the toPromise() method on the Observable
 
 import { Contact } from '../contact/contact';
 
@@ -17,13 +17,21 @@ export class ContactService {
 
     getContacts(): Promise<Contact[]> {
         return this.http.get(this.httpUrl)
-            .toPromise()
-            .then(response => response.json().data as Contact[]);
-            // .catch(this.handleError);
+            .toPromise() // angular returns and Observable object but we can convert it to a more familiar Promise
+            .then(response => response.json().data as Contact[])
+            .catch((error) => {
+                console.log(error);
+                return Promise.reject(error);
+            }); // on production we can do something fancier than this
     }
 
     getContact(id: number): Promise<Contact>{
-        return this.getContacts().then(contacts => contacts.find( contact => contact.id === id ));
+        return this.getContacts()
+            .then(contacts => contacts.find( (contact) => contact.id === id ))
+            .catch((error) => {
+                console.log(error);
+                return Promise.reject(error);
+            });
     }
 
     update(contact: Contact): Promise<Contact> {
@@ -32,7 +40,23 @@ export class ContactService {
         return this.http
             .put(url, JSON.stringify(contact), {headers: this.headers})
             .toPromise()
-            .then(() => contact);
+            .then()
+            .catch((error) => {
+                console.log(error);
+                return Promise.reject(error);
+            });
+    }
+
+    delete(id: number): Promise<any> {
+        const url = `${this.httpUrl}/${id}`;
+
+        return this.http.delete(url, {headers: this.headers})
+            .toPromise()
+            .then()
+            .catch((error)=>{
+                console.log(error);
+                return Promise.reject(error);
+            });
     }
 
 }

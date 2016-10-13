@@ -10,27 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var common_1 = require('@angular/common');
 var contact_service_1 = require('../shared/contact.service');
 var AdminComponent = (function () {
-    function AdminComponent(contactService, route, location) {
+    function AdminComponent(contactService, route) {
         this.contactService = contactService;
         this.route = route;
-        this.location = location;
     }
     AdminComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.forEach(function (params) {
             var id = +params['id']; // convert string id to number
             _this.contactService.getContact(id) // find the specific contact based on the id
-                .then(function (contact) { return _this.contact = contact; });
+                .then(function (contact) { return _this.contact = contact; })
+                .catch(function (error) { return console.log(error); });
         });
         // show the list for deletion
         this.contactService.getContacts()
-            .then(function (contacts) { return _this.contacts = contacts; });
-    };
-    AdminComponent.prototype.goBack = function () {
-        this.location.back();
+            .then(function (contacts) { return _this.contacts = contacts; })
+            .catch(function (error) { return console.log(error); });
     };
     AdminComponent = __decorate([
         core_1.Component({
@@ -39,7 +36,7 @@ var AdminComponent = (function () {
             templateUrl: './admin.component.html',
             styleUrls: ['../contact-detail-component/contact-detail.component.css']
         }), 
-        __metadata('design:paramtypes', [contact_service_1.ContactService, router_1.ActivatedRoute, common_1.Location])
+        __metadata('design:paramtypes', [contact_service_1.ContactService, router_1.ActivatedRoute])
     ], AdminComponent);
     return AdminComponent;
 }());

@@ -16,14 +16,15 @@ var ContactsComponent = (function () {
         this.contactService = contactService;
         this.router = router;
     }
-    ContactsComponent.prototype.getContacts = function () {
-        var _this = this;
-        this.contactService.getContacts()
-            .then(function (result) { return _this.contacts = result; });
-    };
     // Get contacts when the app starts
     ContactsComponent.prototype.ngOnInit = function () {
         this.getContacts();
+    };
+    ContactsComponent.prototype.getContacts = function () {
+        var _this = this;
+        this.contactService.getContacts()
+            .then(function (result) { return _this.contacts = result; })
+            .catch(function (error) { return console.log(error); });
     };
     // Get contact object on click event
     ContactsComponent.prototype.getSelected = function (contact) {
@@ -33,6 +34,20 @@ var ContactsComponent = (function () {
     ContactsComponent.prototype.goToDetails = function (contact) {
         var url = ['/contacts', contact.id];
         this.router.navigate(url);
+    };
+    //
+    ContactsComponent.prototype.deleteContact = function (contact) {
+        if (window.confirm("Are you sure you want to delete this contact ? ")) {
+            // Delete the contact instantly from the view
+            this.contacts.splice(this.contacts.indexOf(contact), 1);
+            // Delete the contact using the service
+            this.contactService.delete(contact.id)
+                .then(function (r) { return console.log(r); })
+                .catch(function (error) { return console.log(error); });
+        }
+        else {
+            return;
+        }
     };
     ContactsComponent = __decorate([
         core_1.Component({

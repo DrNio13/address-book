@@ -1,3 +1,4 @@
+@import url(../app.css);
 body {
   background: whitesmoke; }
 
@@ -14,8 +15,24 @@ body {
   display: block;
   text-align: center;
   background: white;
-  border: 1px solid white;
-  height: 50px; }
+  height: 50px;
+  padding: 0;
+  margin-bottom: 10px; }
+  .tab:first-child {
+    border-width: 1px 0 1px 1px;
+    border-style: solid;
+    border-color: #337ab7;
+    border-radius: 5px 0 0 5px; }
+  .tab:last-child {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #337ab7;
+    border-radius: 0 5px 5px 0; }
+  .tab a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    line-height: 50px; }
 
 .card {
   border: 0;
@@ -32,7 +49,8 @@ body {
   .card .name:hover {
     cursor: pointer; }
   .card h3 {
-    margin-top: 10px; }
+    margin-top: 10px;
+    color: #337ab7; }
   .card img {
     border-radius: 50%;
     border: 5px solid #c7c7c7; }
@@ -41,5 +59,9 @@ body {
   .card .delete-icon {
     opacity: 0;
     margin-top: 10px; }
+
+.warning {
+  background: black;
+  color: whitesmoke; }
 
 /*# sourceMappingURL=contacts.component.css.map */

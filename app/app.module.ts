@@ -20,6 +20,8 @@ import {AdminComponent} from './admin/admin.component';
         FormsModule,
         HttpModule,
         InMemoryWebApiModule.forRoot(DataService),
+        // Configure here the routes of the app
+        // Start from specific to more general urls
         RouterModule.forRoot([
             {
                 path: 'contacts/:id',

@@ -31,6 +31,8 @@ var AppModule = (function () {
                 forms_1.FormsModule,
                 http_1.HttpModule,
                 angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(data_service_1.DataService),
+                // Configure here the routes of the app
+                // Start from specific to more general urls
                 router_1.RouterModule.forRoot([
                     {
                         path: 'contacts/:id',
