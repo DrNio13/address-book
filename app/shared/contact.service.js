@@ -55,6 +55,16 @@ var ContactService = (function () {
             return Promise.reject(error);
         });
     };
+    ContactService.prototype.create = function (contact) {
+        return this.http
+            .post(this.httpUrl, JSON.stringify({ name: contact.name, lastName: contact.lastName, email: contact.email, country: contact.country, img: contact.img, postcard: contact.postcard }), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json().data; })
+            .catch(function (error) {
+            console.log(error);
+            return Promise.reject(error);
+        });
+    };
     ContactService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

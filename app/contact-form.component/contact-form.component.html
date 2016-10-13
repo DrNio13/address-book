@@ -1,0 +1,34 @@
+<div class="container">
+    <h1>Add Contact</h1>
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input placeholder="Name" type="text" class="form-control" id="name" [(ngModel)]="contact.name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input placeholder="Surname" type="text" class="form-control" id="lastName" [(ngModel)]="contact.lastName" name="lastName" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input placeholder="Email" type="text" class="form-control" id="email" [(ngModel)]="contact.email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Image</label>
+            <input placeholder="http://image.png" type="text" class="form-control" id="img" [(ngModel)]="contact.img" name="img" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Postcard</label>
+            <input placeholder="http://image.png" type="text" class="form-control" id="postcard" [(ngModel)]="contact.postcard" name="postcard" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+            <select class="form-control" id="country"  [(ngModel)]="contact.country" name="country" required>
+                <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-default" (click)="addContact(contact)">Add</button>
+    </form>
+
+</div>
+

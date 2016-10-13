@@ -1,3 +1,5 @@
+var BROWSER_SYNC_LOL_GLOBAL_VAR = window.name;
+
 import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
@@ -12,7 +14,7 @@ import {AppComponent}   from './app.component';
 import {ContactService} from './shared/contact.service';
 import {ContactsComponent} from './contacts-component/contacts.component';
 import {ContactDetailsComponent} from './contact-detail-component/contact-detail.component';
-import {AdminComponent} from './admin/admin.component';
+import {ContactFormComponent} from './contact-form.component/contact-form.component';
 
 @NgModule({
     imports: [
@@ -29,7 +31,7 @@ import {AdminComponent} from './admin/admin.component';
             },
             {
                 path: 'admin',
-                component: AdminComponent
+                component: ContactFormComponent
             },
             {
                 path: '',
@@ -42,7 +44,8 @@ import {AdminComponent} from './admin/admin.component';
         AppComponent,
         ContactsComponent,
         ContactDetailsComponent,
-        AdminComponent
+        // AdminComponent,
+        ContactFormComponent
     ],
     providers: [ContactService], // available for all the app
     bootstrap: [AppComponent]

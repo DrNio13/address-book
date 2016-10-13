@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var BROWSER_SYNC_LOL_GLOBAL_VAR = window.name;
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
@@ -20,7 +21,7 @@ var app_component_1 = require('./app.component');
 var contact_service_1 = require('./shared/contact.service');
 var contacts_component_1 = require('./contacts-component/contacts.component');
 var contact_detail_component_1 = require('./contact-detail-component/contact-detail.component');
-var admin_component_1 = require('./admin/admin.component');
+var contact_form_component_1 = require('./contact-form.component/contact-form.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -40,7 +41,7 @@ var AppModule = (function () {
                     },
                     {
                         path: 'admin',
-                        component: admin_component_1.AdminComponent
+                        component: contact_form_component_1.ContactFormComponent
                     },
                     {
                         path: '',
@@ -52,7 +53,8 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 contacts_component_1.ContactsComponent,
                 contact_detail_component_1.ContactDetailsComponent,
-                admin_component_1.AdminComponent
+                // AdminComponent,
+                contact_form_component_1.ContactFormComponent
             ],
             providers: [contact_service_1.ContactService],
             bootstrap: [app_component_1.AppComponent]

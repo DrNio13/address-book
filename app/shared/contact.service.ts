@@ -59,4 +59,15 @@ export class ContactService {
             });
     }
 
+    create(contact: Contact): Promise<Contact> {
+        return this.http
+            .post(this.httpUrl, JSON.stringify({name: contact.name, lastName: contact.lastName, email: contact.email, country: contact.country, img: contact.img, postcard: contact.postcard}), {headers: this.headers})
+            .toPromise()
+            .then(res => res.json().data)
+            .catch((error)=>{
+                console.log(error);
+                return Promise.reject(error);
+            });
+    }
+
 }

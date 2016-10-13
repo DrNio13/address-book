@@ -22,6 +22,7 @@ export class ContactsComponent implements OnInit{
     // Get contacts when the app starts
     ngOnInit(): void {
         this.getContacts();
+
     }
 
     private getContacts(): void{
