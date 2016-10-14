@@ -20,7 +20,6 @@ var data_service_1 = require('./shared/data.service');
 var app_component_1 = require('./app.component');
 var contact_service_1 = require('./shared/contact.service');
 var contacts_component_1 = require('./contacts-component/contacts.component');
-var contact_detail_component_1 = require('./contact-detail-component/contact-detail.component');
 var contact_form_component_1 = require('./contact-form.component/contact-form.component');
 var AppModule = (function () {
     function AppModule() {
@@ -37,7 +36,7 @@ var AppModule = (function () {
                 router_1.RouterModule.forRoot([
                     {
                         path: 'contacts/:id',
-                        component: contact_detail_component_1.ContactDetailsComponent
+                        component: contact_form_component_1.ContactFormComponent
                     },
                     {
                         path: 'admin',
@@ -52,8 +51,6 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 contacts_component_1.ContactsComponent,
-                contact_detail_component_1.ContactDetailsComponent,
-                // AdminComponent,
                 contact_form_component_1.ContactFormComponent
             ],
             providers: [contact_service_1.ContactService],

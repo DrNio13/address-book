@@ -9,15 +9,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var contact_service_1 = require('../shared/contact.service');
 var contact_1 = require('../contact/contact');
 var ContactFormComponent = (function () {
-    function ContactFormComponent(contactService) {
+    function ContactFormComponent(contactService, route) {
         this.contactService = contactService;
+        this.route = route;
         this.countries = ['Greece', 'Andora']; // fetch from json
         this.submitted = false;
         this.contact = new contact_1.Contact(10, '', '', '', '');
     }
+    ContactFormComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.getContacts();
+        console.log(this.route.params);
+        if (this.route.params['_value'].id) {
+            this.route.params.forEach(function (params) {
+                var id = +params['id']; // convert string id to number
+                _this.contactService.getContact(id) // find the specific contact based on the id
+                    .then(function (contact) { return _this.contact = contact; })
+                    .catch(function (error) { return console.log(error); });
+            });
+        }
+        // show the list for deletion
+        this.contactService.getContacts()
+            .then(function (contacts) { return _this.contacts = contacts; })
+            .catch(function (error) { return console.log(error); });
+    };
     ContactFormComponent.prototype.onSubmit = function () {
         this.submitted = true;
     };
@@ -26,9 +45,6 @@ var ContactFormComponent = (function () {
         this.contactService
             .getContacts()
             .then(function (contacts) { return _this.contacts = contacts; });
-    };
-    ContactFormComponent.prototype.ngOnInit = function () {
-        this.getContacts();
     };
     ContactFormComponent.prototype.addContact = function (contact) {
         var _this = this;
@@ -45,7 +61,7 @@ var ContactFormComponent = (function () {
             templateUrl: 'contact-form.component.html',
             styleUrls: ['contact-form.component.css']
         }), 
-        __metadata('design:paramtypes', [contact_service_1.ContactService])
+        __metadata('design:paramtypes', [contact_service_1.ContactService, router_1.ActivatedRoute])
     ], ContactFormComponent);
     return ContactFormComponent;
 }());

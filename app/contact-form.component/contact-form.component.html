@@ -1,34 +1,71 @@
 <div class="container">
-    <h1>Add Contact</h1>
-    <form>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input placeholder="Name" type="text" class="form-control" id="name" [(ngModel)]="contact.name" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input placeholder="Surname" type="text" class="form-control" id="lastName" [(ngModel)]="contact.lastName" name="lastName" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input placeholder="Email" type="text" class="form-control" id="email" [(ngModel)]="contact.email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Image</label>
-            <input placeholder="http://image.png" type="text" class="form-control" id="img" [(ngModel)]="contact.img" name="img" required>
-        </div>
-        <div class="form-group">
-            <label for="country">Postcard</label>
-            <input placeholder="http://image.png" type="text" class="form-control" id="postcard" [(ngModel)]="contact.postcard" name="postcard" required>
-        </div>
-        <div class="form-group">
-            <label for="country">Country</label>
-            <select class="form-control" id="country"  [(ngModel)]="contact.country" name="country" required>
-                <option *ngFor="let country of countries" [value]="country">{{country}}</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-default" (click)="addContact(contact)">Add</button>
-    </form>
+    <div class="col-xs-6">
+        <h2 class="text-center">Add Contact</h2>
+        <form #contactForm = "ngForm" >
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input maxlength="10"
+                       minlength="2"
+                       pattern="[a-zA-Z ]*" placeholder="Name" type="text" class="form-control" id="name" [(ngModel)]="contact.name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input maxlength="10"
+                       minlength="3"
+                       pattern="[a-zA-Z ]*"
+                       placeholder="Surname" type="text" class="form-control" id="lastName" [(ngModel)]="contact.lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input maxlength="30"
+                       minlength="5"
+                       pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                       placeholder="Email" type="text" class="form-control" id="email" [(ngModel)]="contact.email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Image (120px x 120px)</label>
+                <input
+                        placeholder="http://image.png" type="text" class="form-control" id="img" [(ngModel)]="contact.img" name="img" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Postcard (400px x 200px)</label>
+                <input
+                       placeholder="http://image.png" type="text" class="form-control" id="postcard" [(ngModel)]="contact.postcard" name="postcard" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select class="form-control" id="country"  [(ngModel)]="contact.country" name="country" required>
+                    <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+                </select>
+            </div>
+            <button [disabled]="!contactForm.form.valid" type="submit" class="btn btn-default" (click)="addContact(contact)">Add</button>
+        </form>
+    </div>
 
+    <div class="col-xs-6">
+        <h2 class="text-center">Preview</h2>
+        <div *ngIf="contact">
+            <article class="card-selected">
+                <figure>
+                    <img ngIF="contact.postcard" src="{{contact.postcard}}">
+                </figure>
+                <div class="col-xs-12 content">
+
+                    <div class="">
+                        <h3>{{contact.name}} {{contact.lastName}}</h3>
+                    </div>
+
+                    <div class="">
+                        <p>{{contact.email}}</p>
+                    </div>
+
+                    <div class="">
+                        <p>{{contact.country}}</p>
+                    </div>
+
+                </div>
+            </article>
+        </div>
+    </div>
 </div>
 

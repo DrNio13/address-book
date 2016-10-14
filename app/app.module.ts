@@ -13,7 +13,6 @@ import {DataService}  from './shared/data.service';
 import {AppComponent}   from './app.component';
 import {ContactService} from './shared/contact.service';
 import {ContactsComponent} from './contacts-component/contacts.component';
-import {ContactDetailsComponent} from './contact-detail-component/contact-detail.component';
 import {ContactFormComponent} from './contact-form.component/contact-form.component';
 
 @NgModule({
@@ -27,7 +26,7 @@ import {ContactFormComponent} from './contact-form.component/contact-form.compon
         RouterModule.forRoot([
             {
                 path: 'contacts/:id',
-                component: ContactDetailsComponent
+                component: ContactFormComponent
             },
             {
                 path: 'admin',
@@ -43,8 +42,6 @@ import {ContactFormComponent} from './contact-form.component/contact-form.compon
     declarations: [
         AppComponent,
         ContactsComponent,
-        ContactDetailsComponent,
-        // AdminComponent,
         ContactFormComponent
     ],
     providers: [ContactService], // available for all the app
