@@ -11,54 +11,28 @@ body {
   padding-bottom: 20px;
   overflow: auto;
   margin: 0 0 10px 0;
-  border-bottom: 1px solid #d8d8d8;
+  border-bottom: 1px solid #009688;
   box-shadow: 0 1px 1px #e8e7e7;
-}
-
-.tab {
-
-  &:first-child {
-    border-width: 1px 0 1px 1px;
-    border-style: solid;
-    border-color: #337ab7;
-    border-radius: 5px 0 0 5px;
-  }
-
-  &:last-child {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #337ab7;
-    border-radius: 0 5px 5px 0;
-  }
-
-  display: block;
-  text-align: center;
-  background: white;
-  height: 50px;
-  padding: 0;
-  margin-bottom: 10px;
-
-  a {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    line-height: 50px;
-  }
 }
 
 .card {
   @extend .headline;
 
+  border-radius: 3px;
   border: 0;
   box-shadow: 0 1px 2px rgba(0,0,0,.3);
 
   @include transition(box-shadow 0.3s ease-out);
 
   &:hover {
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 
     .delete-icon {
       opacity: 1;
+    }
+
+    .name {
+      color: #00BFA5;
     }
   }
 
@@ -70,13 +44,13 @@ body {
 
   h3 {
     margin-top: 10px;
-    color: #337ab7;
+    color: #26A69A;
   }
 
   img {
     max-width: 120px;
     border-radius: 50%;
-    border: 5px solid #c7c7c7;
+    border: 5px solid #009688;
 
     &:hover {
       cursor: pointer;
@@ -86,6 +60,21 @@ body {
   .delete-icon {
     opacity: 0;
     margin-top: 10px;
+    background: #009688;
+    color: whitesmoke;
+    border: 0;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px 0 rgba(50,50,50,0.3);
+    width: 30px;
+    height: 30px;
+
+
+    @include transition(all 0.2s ease-in);
+
+    &:hover {
+      background: lighten(#009688, 5%);
+      box-shadow: 0 3px 6px 0 rgba(50,50,50,0.3);
+    }
   }
 }
 
