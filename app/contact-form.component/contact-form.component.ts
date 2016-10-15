@@ -16,8 +16,8 @@ import {CountriesService} from '../shared/countries.service';
 export class ContactFormComponent implements OnInit {
 
     private countries = [];
-    private submitted = false;
     private contact = new Contact(10, '', '', '', '');
+    private selected = false;
     contacts: Contact[];
 
     constructor(private contactService: ContactService,
@@ -31,6 +31,7 @@ export class ContactFormComponent implements OnInit {
         this.getContacts();
 
         if (this.route.params['_value'].id) {
+            this.selected = true;
             this.route.params.forEach((params: Params) => {
                 let id = +params['id']; // convert string id to number
                 this.contactService.getContact(id) // find the specific contact based on the id
@@ -43,10 +44,6 @@ export class ContactFormComponent implements OnInit {
         this.contactService.getContacts()
             .then((contacts)=> this.contacts = contacts)
             .catch(error => console.log(error));
-    }
-
-    onSubmit() {
-        this.submitted = true;
     }
 
     getContacts(): void {
@@ -62,7 +59,7 @@ export class ContactFormComponent implements OnInit {
                 this.contacts.push(contact);
             });
 
-        window.alert(`Contact ${contact.name} saved`);
+        window.alert(`Contact ${contact.name} added!`);
     }
 
     getCountries(): void {
@@ -72,5 +69,11 @@ export class ContactFormComponent implements OnInit {
                 console.log(countries);
             })
             .catch((e)=>console.log('error',e));
+    }
+
+    updateContact(contact: Contact): void {
+        this.contactService.update(contact)
+            .then(() => window.alert(`Contact ${contact.name} saved.`))
+            .catch(() => window.alert('Something went wrong'));
     }
 }

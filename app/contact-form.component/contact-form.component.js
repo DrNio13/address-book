@@ -19,14 +19,15 @@ var ContactFormComponent = (function () {
         this.route = route;
         this.countryService = countryService;
         this.countries = [];
-        this.submitted = false;
         this.contact = new contact_1.Contact(10, '', '', '', '');
+        this.selected = false;
     }
     ContactFormComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.getCountries();
         this.getContacts();
         if (this.route.params['_value'].id) {
+            this.selected = true;
             this.route.params.forEach(function (params) {
                 var id = +params['id']; // convert string id to number
                 _this.contactService.getContact(id) // find the specific contact based on the id
@@ -38,9 +39,6 @@ var ContactFormComponent = (function () {
         this.contactService.getContacts()
             .then(function (contacts) { return _this.contacts = contacts; })
             .catch(function (error) { return console.log(error); });
-    };
-    ContactFormComponent.prototype.onSubmit = function () {
-        this.submitted = true;
     };
     ContactFormComponent.prototype.getContacts = function () {
         var _this = this;
@@ -54,7 +52,7 @@ var ContactFormComponent = (function () {
             .then(function (contact) {
             _this.contacts.push(contact);
         });
-        window.alert("Contact " + contact.name + " saved");
+        window.alert("Contact " + contact.name + " added!");
     };
     ContactFormComponent.prototype.getCountries = function () {
         var _this = this;
@@ -64,6 +62,11 @@ var ContactFormComponent = (function () {
             console.log(countries);
         })
             .catch(function (e) { return console.log('error', e); });
+    };
+    ContactFormComponent.prototype.updateContact = function (contact) {
+        this.contactService.update(contact)
+            .then(function () { return window.alert("Contact " + contact.name + " saved."); })
+            .catch(function () { return window.alert('Something went wrong'); });
     };
     ContactFormComponent = __decorate([
         core_1.Component({
