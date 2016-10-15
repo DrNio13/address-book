@@ -16,9 +16,10 @@ var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 // Fake Web Server Http requests
 var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
-var data_service_1 = require('./shared/data.service');
+var data_service_db_1 = require('./shared/data.service.db');
 var app_component_1 = require('./app.component');
 var contact_service_1 = require('./shared/contact.service');
+var countries_service_1 = require('./shared/countries.service');
 var contacts_component_1 = require('./contacts-component/contacts.component');
 var contact_form_component_1 = require('./contact-form.component/contact-form.component');
 var AppModule = (function () {
@@ -30,7 +31,7 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
-                angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(data_service_1.DataService),
+                angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(data_service_db_1.InMemoryDataService),
                 // Configure here the routes of the app
                 // Start from specific to more general urls
                 router_1.RouterModule.forRoot([
@@ -53,7 +54,11 @@ var AppModule = (function () {
                 contacts_component_1.ContactsComponent,
                 contact_form_component_1.ContactFormComponent
             ],
-            providers: [contact_service_1.ContactService],
+            providers: [
+                // available for all the app
+                contact_service_1.ContactService,
+                countries_service_1.CountriesService
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

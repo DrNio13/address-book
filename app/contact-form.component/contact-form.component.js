@@ -12,18 +12,20 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var contact_service_1 = require('../shared/contact.service');
 var contact_1 = require('../contact/contact');
+var countries_service_1 = require('../shared/countries.service');
 var ContactFormComponent = (function () {
-    function ContactFormComponent(contactService, route) {
+    function ContactFormComponent(contactService, route, countryService) {
         this.contactService = contactService;
         this.route = route;
-        this.countries = ['Greece', 'Andora']; // fetch from json
+        this.countryService = countryService;
+        this.countries = [];
         this.submitted = false;
         this.contact = new contact_1.Contact(10, '', '', '', '');
     }
     ContactFormComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.getCountries();
         this.getContacts();
-        console.log(this.route.params);
         if (this.route.params['_value'].id) {
             this.route.params.forEach(function (params) {
                 var id = +params['id']; // convert string id to number
@@ -54,6 +56,15 @@ var ContactFormComponent = (function () {
         });
         window.alert("Contact " + contact.name + " saved");
     };
+    ContactFormComponent.prototype.getCountries = function () {
+        var _this = this;
+        this.countryService.getCountries()
+            .then(function (countries) {
+            _this.countries = countries;
+            console.log(countries);
+        })
+            .catch(function (e) { return console.log('error', e); });
+    };
     ContactFormComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -61,7 +72,7 @@ var ContactFormComponent = (function () {
             templateUrl: 'contact-form.component.html',
             styleUrls: ['contact-form.component.css']
         }), 
-        __metadata('design:paramtypes', [contact_service_1.ContactService, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [contact_service_1.ContactService, router_1.ActivatedRoute, countries_service_1.CountriesService])
     ], ContactFormComponent);
     return ContactFormComponent;
 }());

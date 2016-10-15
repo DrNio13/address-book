@@ -15,7 +15,7 @@ var ContactService = (function () {
     function ContactService(http) {
         this.http = http;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.httpUrl = '../contact/contacts';
+        this.httpUrl = '../contacts/contacts';
     }
     ContactService.prototype.getContacts = function () {
         return this.http.get(this.httpUrl)

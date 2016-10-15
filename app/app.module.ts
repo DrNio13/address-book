@@ -8,10 +8,11 @@ import {HttpModule} from '@angular/http';
 
 // Fake Web Server Http requests
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {DataService}  from './shared/data.service';
+import {InMemoryDataService}  from './shared/data.service.db';
 
 import {AppComponent}   from './app.component';
 import {ContactService} from './shared/contact.service';
+import {CountriesService} from './shared/countries.service';
 import {ContactsComponent} from './contacts-component/contacts.component';
 import {ContactFormComponent} from './contact-form.component/contact-form.component';
 
@@ -20,7 +21,7 @@ import {ContactFormComponent} from './contact-form.component/contact-form.compon
         BrowserModule,
         FormsModule,
         HttpModule,
-        InMemoryWebApiModule.forRoot(DataService),
+        InMemoryWebApiModule.forRoot(InMemoryDataService),
         // Configure here the routes of the app
         // Start from specific to more general urls
         RouterModule.forRoot([
@@ -44,7 +45,11 @@ import {ContactFormComponent} from './contact-form.component/contact-form.compon
         ContactsComponent,
         ContactFormComponent
     ],
-    providers: [ContactService], // available for all the app
+    providers: [
+        // available for all the app
+        ContactService,
+        CountriesService
+    ],
     bootstrap: [AppComponent]
 })
 

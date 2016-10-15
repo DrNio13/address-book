@@ -10,7 +10,7 @@
             </div>
             <div class="form-group">
                 <label for="lastName">Last Name</label>
-                <input maxlength="10"
+                <input maxlength="20"
                        minlength="3"
                        pattern="[a-zA-Z ]*"
                        placeholder="Surname" type="text" class="form-control" id="lastName" [(ngModel)]="contact.lastName" name="lastName" required>
@@ -34,8 +34,8 @@
             </div>
             <div class="form-group">
                 <label for="country">Country</label>
-                <select class="form-control" id="country"  [(ngModel)]="contact.country" name="country" required>
-                    <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+                <select class="form-control" id="country"  [(ngModel)]="contact.country.name" name="country" required>
+                    <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
                 </select>
             </div>
             <button [disabled]="!contactForm.form.valid" type="submit" class="btn btn-default" (click)="addContact(contact)">Add</button>
@@ -47,7 +47,7 @@
         <div *ngIf="contact">
             <article class="card-selected">
                 <figure>
-                    <img ngIF="contact.postcard" src="{{contact.postcard}}">
+                    <img *ngIf="contact.postcard" src="{{contact.postcard}}">
                 </figure>
                 <div class="col-xs-12 content">
 
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="">
-                        <p>{{contact.country}}</p>
+                        <p>{{contact.country.name}}</p>
                     </div>
 
                 </div>

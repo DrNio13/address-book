@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
 
 import {ContactService} from '../shared/contact.service';
 import {Contact} from '../contact/contact';
+
+import {CountriesService} from '../shared/countries.service';
 
 @Component({
     moduleId: module.id,
@@ -11,20 +13,23 @@ import {Contact} from '../contact/contact';
     styleUrls: ['contact-form.component.css']
 })
 
-export class ContactFormComponent implements OnInit{
-    private countries = ['Greece', 'Andora']; // fetch from json
+export class ContactFormComponent implements OnInit {
+
+    private countries = [];
     private submitted = false;
-    private contact = new Contact(10,'', '', '', '');
+    private contact = new Contact(10, '', '', '', '');
     contacts: Contact[];
 
-    constructor(
-        private contactService: ContactService,
-        private route: ActivatedRoute
-    ){}
+    constructor(private contactService: ContactService,
+                private route: ActivatedRoute,
+                private countryService: CountriesService) {
+    }
 
     ngOnInit(): void {
+
+        this.getCountries();
         this.getContacts();
-        console.log(this.route.params);
+
         if (this.route.params['_value'].id) {
             this.route.params.forEach((params: Params) => {
                 let id = +params['id']; // convert string id to number
@@ -50,7 +55,7 @@ export class ContactFormComponent implements OnInit{
             .then(contacts => this.contacts = contacts);
     }
 
-    private addContact(contact: Contact): void {
+    addContact(contact: Contact): void {
 
         this.contactService.create(contact)
             .then(contact => {
@@ -58,5 +63,14 @@ export class ContactFormComponent implements OnInit{
             });
 
         window.alert(`Contact ${contact.name} saved`);
+    }
+
+    getCountries(): void {
+        this.countryService.getCountries()
+            .then(countries => {
+                this.countries = countries;
+                console.log(countries);
+            })
+            .catch((e)=>console.log('error',e));
     }
 }

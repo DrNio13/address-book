@@ -9,7 +9,7 @@ import { Contact } from '../contact/contact';
 export class ContactService {
 
     private headers = new Headers({'Content-Type': 'application/json'});
-    private httpUrl = '../contact/contacts';
+    private httpUrl = '../contacts/contacts';
 
     constructor(
         private http: Http
