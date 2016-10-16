@@ -51,6 +51,11 @@ a {
 .btn-default[disabled]:hover {
   background: #004D40; }
 
+.active {
+  background: #009688;
+  color: #1DE9B6;
+  text-decoration: none; }
+
 .tab {
   display: block;
   text-align: center;

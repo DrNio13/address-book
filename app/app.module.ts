@@ -26,16 +26,21 @@ import {ContactFormComponent} from './contact-form.component/contact-form.compon
         // Start from specific to more general urls
         RouterModule.forRoot([
             {
-                path: 'contacts/:id',
+                path: 'contact/:id',
                 component: ContactFormComponent
             },
             {
-                path: 'admin',
+                path: 'add-contact',
                 component: ContactFormComponent
+            },
+            {
+                path: 'contacts',
+                component: ContactsComponent
             },
             {
                 path: '',
-                component: ContactsComponent
+                redirectTo: '/contacts',
+                pathMatch: 'full'
             }
 
         ])

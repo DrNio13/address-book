@@ -36,16 +36,21 @@ var AppModule = (function () {
                 // Start from specific to more general urls
                 router_1.RouterModule.forRoot([
                     {
-                        path: 'contacts/:id',
+                        path: 'contact/:id',
                         component: contact_form_component_1.ContactFormComponent
                     },
                     {
-                        path: 'admin',
+                        path: 'add-contact',
                         component: contact_form_component_1.ContactFormComponent
+                    },
+                    {
+                        path: 'contacts',
+                        component: contacts_component_1.ContactsComponent
                     },
                     {
                         path: '',
-                        component: contacts_component_1.ContactsComponent
+                        redirectTo: '/contacts',
+                        pathMatch: 'full'
                     }
                 ])
             ],

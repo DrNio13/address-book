@@ -32,7 +32,7 @@ var ContactsComponent = (function () {
     };
     // Go the the detail of the contact
     ContactsComponent.prototype.goToDetails = function (contact) {
-        var url = ['/contacts', contact.id];
+        var url = ['/contact', contact.id];
         this.router.navigate(url);
     };
     //

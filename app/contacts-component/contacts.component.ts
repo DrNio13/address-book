@@ -38,7 +38,7 @@ export class ContactsComponent implements OnInit{
 
     // Go the the detail of the contact
     private goToDetails(contact: Contact): void {
-        let url = ['/contacts', contact.id];
+        let url = ['/contact', contact.id];
         this.router.navigate(url);
     }
 
